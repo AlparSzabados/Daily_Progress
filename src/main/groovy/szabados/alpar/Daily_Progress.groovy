@@ -12,13 +12,13 @@ class Daily_Progress {
         def monthDay = MonthDay.now().format(DateTimeFormatter.ofPattern("MMM-dd"))
         def year = Year.now()
         def today = "${monthDay}-${year}"
-        def QUESTIONS = createQuestions(QUESTIONS)
+        def questions = createQuestions(QUESTIONS)
 
         def insignia = new File('insignia.txt').text
         println (insignia)
         println "Stardate: ${today}\n\nCaptains Log:\n\n"
 
-        for (activities in QUESTIONS) {
+        for (activities in questions) {
             println "Have you done any ${activities.getKey()} today?"
             activities.value = userInput()
         }
@@ -26,7 +26,7 @@ class Daily_Progress {
         def text = "${insignia}\n${today}\n\nToday's progress:\n\n"
         def output = new File("${today}.txt")
 
-        QUESTIONS.each { text += "${it.key.capitalize()}: ${it.value}\n" }
+        questions.each { text += "${it.key.capitalize()}: ${it.value}\n" }
 
         println "Summary of: ${text}\n"
 
