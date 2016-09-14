@@ -14,13 +14,16 @@ class Daily_Progress {
         def today = "${monthDay}-${year}"
         def QUESTIONS = createQuestions(QUESTIONS)
 
-        println "Today's date is ${today}\n"
+        def insignia = new File('insignia.txt').text
+        println (insignia)
+        println "Stardate: ${today}\n\nCaptains Log:\n\n"
+
         for (activities in QUESTIONS) {
             println "Have you done any ${activities.getKey()} today?"
             activities.value = userInput()
         }
 
-        def text = "${today}\n\nToday's progress:\n\n"
+        def text = "${insignia}\n${today}\n\nToday's progress:\n\n"
         def output = new File("${today}.txt")
 
         QUESTIONS.each { text += "${it.key.capitalize()}: ${it.value}\n" }
