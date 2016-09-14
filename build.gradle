@@ -14,7 +14,7 @@ apply plugin: 'idea'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
-mainClassName = 'szabados.alpar.DummyClass'
+mainClassName = 'szabados.alpar.Daily_Progress'
 
 repositories {
     mavenCentral()
