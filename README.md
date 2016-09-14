@@ -1,0 +1,1 @@
+A small application to monitor your daily progress and log your experiences.
