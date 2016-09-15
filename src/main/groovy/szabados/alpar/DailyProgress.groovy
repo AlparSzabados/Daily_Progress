@@ -3,7 +3,7 @@ package szabados.alpar
 import static szabados.alpar.Config.*
 import static szabados.alpar.CreateQuestions.createQuestions
 import static szabados.alpar.CurrentDate.TODAY
-import static szabados.alpar.SaveToLog.*
+import static szabados.alpar.SaveToLog.saveLog
 import static szabados.alpar.UserInput.userInput
 
 class DailyProgress {
