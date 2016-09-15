@@ -15,18 +15,18 @@ class DailyProgress {
             question.value = userInput()
         }
 
-        def answers = "\n${INSIGNIA}\n${TODAY}\n\nToday's progress:\n\n"
-        questions.each { answers += "${it.key.capitalize()}: ${it.value}\n" }
-        println "Summary of: ${answers}\n"
+        println "Log preview:\n\n${INSIGNIA}\n${TODAY}\n\nToday's progress:\n"
+        String answers = questions.inject('') { s, it -> s + "${it.key.capitalize()}: ${it.value}\n" }
+        println "${answers}\n"
 
         File output = LOG
         boolean fileExists = output.exists()
         if (fileExists) {
             println OVERWRITE_MESSAGE
-            userInput().toLowerCase() == 'y' ? output.write(answers) : println("Your progress was not overwritten")
+            userInput().toLowerCase() == 'y' ? output.write(answers.toString()) : println("Your progress was not overwritten")
         } else {
             println SAVE_MESSAGE
-            userInput().toLowerCase() == 'y' ? output.write(answers) : println("Your progress was not saved")
+            userInput().toLowerCase() == 'y' ? output.write(answers.toString()) : println("Your progress was not saved")
         }
     }
 }
