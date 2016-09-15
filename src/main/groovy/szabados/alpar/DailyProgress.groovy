@@ -3,7 +3,7 @@ package szabados.alpar
 import static szabados.alpar.Config.*
 import static szabados.alpar.CreateQuestions.createQuestions
 import static szabados.alpar.CurrentDate.TODAY
-import static szabados.alpar.SaveToLog.saveLog
+import static szabados.alpar.SaveToLog.*
 import static szabados.alpar.UserInput.userInput
 
 class DailyProgress {
@@ -21,14 +21,12 @@ class DailyProgress {
         println "${logPreview}${answers}\n"
 
         boolean fileExists = LOG.exists()
-        def writeToLog = LOG.write(answers.toString())
-
         if (!fileExists) {
             println SAVE
-            saveLog(writeToLog, SAVED, NOT_SAVED)
+            saveLog(answers, SAVED, NOT_SAVED)
         } else {
             println OVERWRITE
-            saveLog(writeToLog, OVERWRITTEN, NOT_OVERWRITTEN)
+            saveLog(answers, OVERWRITTEN, NOT_OVERWRITTEN)
         }
     }
 }

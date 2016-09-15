@@ -1,12 +1,13 @@
 package szabados.alpar
 
+import static szabados.alpar.Config.LOG
 import static szabados.alpar.UserInput.userInput
 
 class SaveToLog {
-    static saveLog(writeToLog, String messageYes, String messageNo) {
-        def userYes = userInput().toLowerCase() == 'y'
+    static saveLog(answers, String messageYes, String messageNo) {
+        boolean userYes = userInput().toLowerCase() == 'y'
         if (userYes) {
-            writeToLog
+            LOG.write(answers.toString())
             println messageYes
         } else
             println messageNo
