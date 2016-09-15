@@ -24,11 +24,11 @@ class DailyProgress {
         def writeToLog = LOG.write(answers.toString())
 
         if (!fileExists) {
-            println SAVE_QUESTION_MESSAGE
-            saveLog(writeToLog, PROGRESS_SAVED_MESSAGE, PROGRESS_NOT_SAVED_MESSAGE)
+            println SAVE
+            saveLog(writeToLog, SAVED, NOT_SAVED)
         } else {
-            println OVERWRITE_QUESTION_MESSAGE
-            saveLog(writeToLog, PROGRESS_OVERWRITTEN_MESSAGE, PROGRESS_NOT_OVERWRITTEN_MESSAGE)
+            println OVERWRITE
+            saveLog(writeToLog, OVERWRITTEN, NOT_OVERWRITTEN)
         }
     }
 }
