@@ -15,18 +15,28 @@ class DailyProgress {
             question.value = userInput()
         }
 
-        println "Log preview:\n\n${INSIGNIA}\n${TODAY}\n\nToday's progress:\n"
+        String logPreview = "Log preview:\n\n${INSIGNIA}\n${TODAY}\n\nToday's progress:\n"
         String answers = questions.inject('') { s, it -> s + "${it.key.capitalize()}: ${it.value}\n" }
-        println "${answers}\n"
+        println "${logPreview}${answers}\n"
 
-        File output = LOG
-        boolean fileExists = output.exists()
-        if (fileExists) {
-            println OVERWRITE_MESSAGE
-            userInput().toLowerCase() == 'y' ? output.write(answers.toString()) : println("Your progress was not overwritten")
+        boolean fileExists = LOG.exists()
+        def writeToLog = LOG.write(answers.toString())
+
+        if (!fileExists) {
+            println SAVE_QUESTION_MESSAGE
+            saveLog(writeToLog, PROGRESS_SAVED_MESSAGE, PROGRESS_NOT_SAVED_MESSAGE)
         } else {
-            println SAVE_MESSAGE
-            userInput().toLowerCase() == 'y' ? output.write(answers.toString()) : println("Your progress was not saved")
+            println OVERWRITE_QUESTION_MESSAGE
+            saveLog(writeToLog, PROGRESS_OVERWRITTEN_MESSAGE, PROGRESS_NOT_OVERWRITTEN_MESSAGE)
         }
+    }
+
+    static saveLog(writeToLog, String messageYes, String messageNo) {
+        def userYes = userInput().toLowerCase() == 'y'
+        if (userYes) {
+            writeToLog
+            println messageYes
+        } else
+            println messageNo
     }
 }
