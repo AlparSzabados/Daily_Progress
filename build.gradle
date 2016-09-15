@@ -5,7 +5,7 @@ buildscript {
 }
 
 group 'szabados.alpar'
-version '1.0.0'
+version '1.0.5'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
@@ -14,7 +14,7 @@ apply plugin: 'idea'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
-mainClassName = 'szabados.alpar.Daily_Progress'
+mainClassName = 'szabados.alpar.DailyProgress'
 
 repositories {
     mavenCentral()
