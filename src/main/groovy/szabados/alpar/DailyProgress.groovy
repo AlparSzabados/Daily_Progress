@@ -3,6 +3,7 @@ package szabados.alpar
 import static szabados.alpar.Config.*
 import static szabados.alpar.CreateQuestions.createQuestions
 import static szabados.alpar.CurrentDate.TODAY
+import static szabados.alpar.SaveToLog.saveLog
 import static szabados.alpar.UserInput.userInput
 
 class DailyProgress {
@@ -29,14 +30,5 @@ class DailyProgress {
             println OVERWRITE_QUESTION_MESSAGE
             saveLog(writeToLog, PROGRESS_OVERWRITTEN_MESSAGE, PROGRESS_NOT_OVERWRITTEN_MESSAGE)
         }
-    }
-
-    static saveLog(writeToLog, String messageYes, String messageNo) {
-        def userYes = userInput().toLowerCase() == 'y'
-        if (userYes) {
-            writeToLog
-            println messageYes
-        } else
-            println messageNo
     }
 }
