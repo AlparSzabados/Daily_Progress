@@ -1,32 +1,32 @@
 package szabados.alpar
 
 import static szabados.alpar.Config.*
-import static szabados.alpar.CreateQuestions.createQuestions
+import static szabados.alpar.CreateQuestions.collectQuestions
 import static szabados.alpar.CurrentDate.TODAY
 import static szabados.alpar.SaveToLog.saveLog
 import static szabados.alpar.UserInput.userInput
 
 class DailyProgress {
     static void main(String... args) {
-        Map<String, String> questions = createQuestions(QUESTIONS)
+        def questions = collectQuestions(QUESTIONS)
         println INSIGNIA
         println STARDATE
         for (question in questions) {
-            println "Have you done any ${question.getKey()} today?"
+            println "Have you done any ${question.key} today?"
             question.value = userInput()
         }
 
-        String logPreview = "Log preview:\n\n${INSIGNIA}\n${TODAY}\n\nToday's progress:\n"
-        String answers = questions.inject('') { s, it -> s + "${it.key.capitalize()}: ${it.value}\n" }
+        def logPreview = "Log preview:\n\n${INSIGNIA}\n${TODAY}\n\nToday's progress:\n"
+        def answers = questions.inject('') { s, it ->  "${s}${it.key.capitalize()}: ${it.value}\n" }
         println "${logPreview}${answers}\n"
 
-        boolean fileExists = LOG.exists()
-        if (!fileExists) {
-            println SAVE
-            saveLog(answers, SAVED, NOT_SAVED)
-        } else {
+        def fileExists = LOG.exists()
+        if (fileExists) {
             println OVERWRITE
             saveLog(answers, OVERWRITTEN, NOT_OVERWRITTEN)
+        } else {
+            println SAVE
+            saveLog(answers, SAVED, NOT_SAVED)
         }
     }
 }
